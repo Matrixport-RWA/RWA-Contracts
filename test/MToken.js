@@ -1148,8 +1148,8 @@ describe("ALL", function () {
       it("error: InvalidSigner", async function () {
         const { mt, nft, operator, alice, bob } = await loadFixture(deployTestFixture);
 
-        const [r, s, v] = await sign712Pack(alice, nft.target, alice.address, 12345, 888, 1731999999);
-        await expect(nft.connect(alice).packWithSig(12345, 888, 1731999999, v, r, s))
+        const [r, s, v] = await sign712Pack(alice, nft.target, alice.address, 12345, 888, 9999999999);
+        await expect(nft.connect(alice).packWithSig(12345, 888, 9999999999, v, r, s))
           .to.be.revertedWithCustomError(nft, "InvalidSigner")
           .withArgs(alice.address);
       });
@@ -1163,8 +1163,8 @@ describe("ALL", function () {
         await mt.connect(operator).mintTo(alice.address, 65000, 0);
         await mt.connect(operator).mintTo(alice.address, 65000, 0);
 
-        const [r, s, v] = await sign712Pack(alice, nft.target, alice.address, 12345, 888, 1731999999);
-        await nft.connect(alice).packWithSig(12345, 888, 1731999999, v, r, s);
+        const [r, s, v] = await sign712Pack(alice, nft.target, alice.address, 12345, 888, 9999999999);
+        await nft.connect(alice).packWithSig(12345, 888, 9999999999, v, r, s);
       });
 
     });
